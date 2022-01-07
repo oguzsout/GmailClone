@@ -5,10 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Card
-import androidx.compose.material.Icon
-import androidx.compose.material.IconButton
-import androidx.compose.material.Text
+import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
@@ -22,18 +19,26 @@ import androidx.compose.ui.unit.dp
 import com.oguzdogdu.gmailclone.GmailApp
 import com.oguzdogdu.gmailclone.R
 import com.oguzdogdu.gmailclone.ui.theme.GmailCloneTheme
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.launch
 
 @Composable
-fun HomeAppBar() {
+fun HomeAppBar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
     Box(modifier = Modifier.padding(10.dp)) {
-        Card(modifier = Modifier.requiredHeight(50.dp),
-            shape = RoundedCornerShape(10.dp), elevation = 6.dp) {
-            Row(verticalAlignment = Alignment.CenterVertically,
+        Card(
+            modifier = Modifier.requiredHeight(50.dp),
+            shape = RoundedCornerShape(10.dp), elevation = 6.dp
+        ) {
+            Row(
+                verticalAlignment = Alignment.CenterVertically,
                 modifier = Modifier
                     .fillMaxSize()
-                    .padding(8.dp)) {
+                    .padding(8.dp)
+            ) {
                 IconButton(onClick = {
-
+                    scope.launch {
+                        scaffoldState.drawerState.open()
+                    }
                 }) {
                     Icon(Icons.Default.Menu, "Menu")
                 }
@@ -47,7 +52,8 @@ fun HomeAppBar() {
                     modifier = Modifier
                         .size(30.dp)
                         .clip(CircleShape)
-                        .background(color = Color.Gray))
+                        .background(color = Color.Gray)
+                )
             }
         }
     }
