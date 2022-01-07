@@ -18,13 +18,17 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.oguzdogdu.gmailclone.GmailApp
 import com.oguzdogdu.gmailclone.R
+import com.oguzdogdu.gmailclone.ui.theme.CustomFont
 import com.oguzdogdu.gmailclone.ui.theme.GmailCloneTheme
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 
 @Composable
 fun HomeAppBar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
-    Box(modifier = Modifier.padding(10.dp)) {
+    Box(
+        modifier = Modifier
+            .padding(10.dp)
+    ) {
         Card(
             modifier = Modifier.requiredHeight(50.dp),
             shape = RoundedCornerShape(10.dp), elevation = 6.dp
@@ -44,6 +48,7 @@ fun HomeAppBar(scaffoldState: ScaffoldState, scope: CoroutineScope) {
                 }
                 Text(
                     text = "Search in Mails",
+                    fontFamily = CustomFont,
                     modifier = Modifier.weight(2.0f)
                 )
                 Image(

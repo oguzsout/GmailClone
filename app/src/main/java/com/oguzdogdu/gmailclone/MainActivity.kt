@@ -10,6 +10,7 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
+import com.oguzdogdu.gmailclone.components.GmailDrawerMenu
 import com.oguzdogdu.gmailclone.components.HomeAppBar
 import com.oguzdogdu.gmailclone.ui.theme.GmailCloneTheme
 
@@ -18,7 +19,6 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GmailCloneTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(color = MaterialTheme.colors.background) {
                     GmailApp()
                 }
@@ -31,10 +31,11 @@ class MainActivity : ComponentActivity() {
 fun GmailApp() {
     val scaffoldState = rememberScaffoldState()
     val coroutineScope = rememberCoroutineScope()
-    Scaffold(topBar = { HomeAppBar(scaffoldState, coroutineScope) },
+    Scaffold(scaffoldState = scaffoldState,
+        topBar = { HomeAppBar(scaffoldState, coroutineScope) },
         drawerContent = {
-
-    }) {
+            GmailDrawerMenu()
+        }) {
     }
 }
 

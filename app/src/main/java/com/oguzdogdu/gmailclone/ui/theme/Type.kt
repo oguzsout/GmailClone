@@ -2,9 +2,11 @@ package com.oguzdogdu.gmailclone.ui.theme
 
 import androidx.compose.material.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.oguzdogdu.gmailclone.R
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -24,5 +26,7 @@ val Typography = Typography(
         fontWeight = FontWeight.Normal,
         fontSize = 12.sp
     )
-    */
+    */,
 )
+val CustomFont = FontFamily(
+    Font(R.font.productsans_medium,FontWeight.Medium))
