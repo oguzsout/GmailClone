@@ -1,8 +1,8 @@
 package com.oguzdogdu.gmailclone.components
 
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -15,13 +15,13 @@ import com.oguzdogdu.gmailclone.ui.theme.CustomFont
 @Composable
 fun GmailDrawerMenu() {
     val menuList = listOf(
-        DrawerMenuData.Divider,
+        //DrawerMenuData.Divider,
         DrawerMenuData.AllInboxes,
-        DrawerMenuData.Divider,
+        //DrawerMenuData.Divider,
         DrawerMenuData.Primary,
         DrawerMenuData.Social,
         DrawerMenuData.Promotions,
-        DrawerMenuData.HeaderOne,
+        //DrawerMenuData.HeaderOne,
         DrawerMenuData.Starred,
         DrawerMenuData.Snoozed,
         DrawerMenuData.Important,
@@ -30,10 +30,10 @@ fun GmailDrawerMenu() {
         DrawerMenuData.Outbox,
         DrawerMenuData.Draft,
         DrawerMenuData.AllMail,
-        DrawerMenuData.HeaderTwo,
+        //DrawerMenuData.HeaderTwo,
         DrawerMenuData.Calendar,
         DrawerMenuData.Contacts,
-        DrawerMenuData.Divider,
+        //DrawerMenuData.Divider,
         DrawerMenuData.Setting,
         DrawerMenuData.Help
     )
@@ -46,5 +46,25 @@ fun GmailDrawerMenu() {
             fontFamily = CustomFont
 
         )
+        menuList.forEach { item ->
+            MailDrawerItem(item = item)
+        }
+    }
+}
+
+@Composable
+fun MailDrawerItem(item: DrawerMenuData) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .height(50.dp)
+            .padding(top = 16.dp)
+    ) {
+        Image(
+            imageVector = item.icon!!,
+            contentDescription = item.title!!,
+            modifier = Modifier.weight(0.5f)
+        )
+        Text(text = item.title, modifier = Modifier.weight(2.0f))
     }
 }
