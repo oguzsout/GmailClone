@@ -79,10 +79,10 @@ sealed class DrawerMenuData(
     )
     object HeaderOne: DrawerMenuData(
         isHeader = true,
-        title = "ALL LABELS"
+        title = "All labels"
     )
     object HeaderTwo: DrawerMenuData(
         isHeader = true,
-        title = "GOOGLE APPS"
+        title = "Google apps"
     )
 }
