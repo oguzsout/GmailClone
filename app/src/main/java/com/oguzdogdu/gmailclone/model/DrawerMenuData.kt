@@ -1,4 +1,4 @@
-package com.oguzdogdu.gmailclone
+package com.oguzdogdu.gmailclone.model
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.outlined.*
