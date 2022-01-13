@@ -3,11 +3,9 @@ package com.oguzdogdu.gmailclone
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.rememberScrollState
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Scaffold
-import androidx.compose.material.Surface
-import androidx.compose.material.rememberScaffoldState
+import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.tooling.preview.Preview
@@ -44,6 +42,13 @@ fun GmailApp() {
         bottomBar = {
             HomeBottomMenu()
         }) {
+        LazyColumn{
+            items(50){
+                index ->
+                Text(text = "Index $index")
+                Divider()
+            }
+        }
     }
 }
 
