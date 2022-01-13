@@ -1,9 +1,15 @@
 package com.oguzdogdu.gmailclone.components
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
+import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.outlined.StarOutline
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -13,17 +19,32 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.oguzdogdu.gmailclone.mailList
 import com.oguzdogdu.gmailclone.model.MailData
 import com.oguzdogdu.gmailclone.ui.theme.CustomFont
 
 @Composable
 fun MailList(padding: PaddingValues) {
-
+    Box(modifier = Modifier.padding(padding)) {
+        LazyColumn(
+            modifier = Modifier
+                .fillMaxSize()
+                .padding(16.dp)
+        ) {
+            items(mailList) { mailData ->
+                MailItem(mailData = mailData)
+            }
+        }
+    }
 }
 
 @Composable
 fun MailItem(mailData: MailData, modifier: Modifier = Modifier) {
-    Row {
+    Row(
+        modifier = modifier
+            .fillMaxWidth()
+            .padding(bottom = 8.dp)
+    ) {
         Card(
             modifier = modifier
                 .padding(end = 8.dp)
@@ -43,13 +64,13 @@ fun MailItem(mailData: MailData, modifier: Modifier = Modifier) {
                 text = mailData.userName,
                 fontSize = 18.sp,
                 fontFamily = CustomFont,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Normal
             )
             Text(
                 text = mailData.subject,
                 fontSize = 15.sp,
                 fontFamily = CustomFont,
-                fontWeight = FontWeight.Bold
+                fontWeight = FontWeight.Medium
             )
             Text(
                 text = mailData.body,
@@ -57,9 +78,19 @@ fun MailItem(mailData: MailData, modifier: Modifier = Modifier) {
                 fontSize = 14.sp
             )
         }
+        Column {
+            Text(text = mailData.timeStamp)
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .size(50.dp)
+                    .padding(top = 16.dp)
 
+            ) {
+                Icon(imageVector = Icons.Outlined.StarOutline, "")
+            }
+        }
     }
-
 }
 
 @Preview(showBackground = true)
