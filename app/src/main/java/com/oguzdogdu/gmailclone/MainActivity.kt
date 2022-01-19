@@ -44,7 +44,7 @@ fun GmailApp() {
             HomeBottomMenu()
         },
         floatingActionButton = {
-            GmailFab()
+            GmailFab(scrollState)
         }
     ) {
 //        /*LazyColumn{
@@ -54,7 +54,7 @@ fun GmailApp() {
 //                Divider()
 //            }
 //        }*/
-        MailList(it)
+        MailList(it,scrollState)
     }
 }
 
