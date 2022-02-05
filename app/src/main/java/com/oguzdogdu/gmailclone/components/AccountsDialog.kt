@@ -22,6 +22,8 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
 import com.oguzdogdu.gmailclone.R
+import com.oguzdogdu.gmailclone.accountList
+import com.oguzdogdu.gmailclone.model.Account
 import com.oguzdogdu.gmailclone.ui.theme.CustomFont
 
 @Composable
@@ -56,33 +58,7 @@ fun AccountsDialogUI(modifier: Modifier = Modifier) {
                 )
 
             }
-            Row(
-                modifier
-                    .fillMaxWidth()
-                    .padding(start = 16.dp, top = 16.dp)
-            ) {
-                Image(
-                    painter = painterResource(id = R.drawable.gmail_profile),
-                    contentDescription = "Profile",
-                    modifier
-                        .size(40.dp)
-                        .clip(CircleShape)
-                        .background(color = Color.Gray)
-                )
-                Column(
-                    modifier
-                        .weight(2.0f)
-                        .padding(start = 16.dp, bottom = 16.dp)
-                ) {
-                    Text(
-                        text = "Jacky Shepherd",
-                        fontWeight = FontWeight.SemiBold,
-                        fontFamily = CustomFont
-                    )
-                    Text(text = "jackyshepherd@gmail.com", fontFamily = CustomFont)
-                }
-                Text(text = "99+", modifier = Modifier.padding(end = 16.dp))
-            }
+            AccountItem(account = accountList[0])
             Row(
                 modifier.fillMaxWidth(), horizontalArrangement =
                 Arrangement.SpaceEvenly
@@ -102,6 +78,51 @@ fun AccountsDialogUI(modifier: Modifier = Modifier) {
             }
             Divider(modifier.padding(top = 16.dp))
         }
+    }
+}
+
+@Composable
+fun AccountItem(account: Account) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp, top = 16.dp)
+    ) {
+        if (account.icon != null) {
+            Image(
+                painter = painterResource(id = account.icon),
+                contentDescription = "Profile",
+                modifier = Modifier
+                    .size(40.dp)
+                    .clip(CircleShape)
+                    .background(color = Color.Gray)
+            )
+        } else {
+            Card(
+                modifier = Modifier
+                    .padding(end = 8.dp)
+                    .size(40.dp)
+                    .clip(CircleShape),
+                backgroundColor = Color.Gray
+            ) {
+
+                Text(
+                    text = account.userName[0].toString(),
+                    textAlign = TextAlign.Center, modifier = Modifier.padding(8.dp),
+                    fontFamily = CustomFont
+                )
+            }
+        }
+        Column(
+            modifier = Modifier
+                .weight(2.0f)
+                .padding(start = 16.dp, bottom = 16.dp)
+        ) {
+            Text(text = account.userName, fontWeight = FontWeight.SemiBold,fontFamily = CustomFont)
+            Text(text = account.email,fontFamily = CustomFont)
+        }
+
+        Text(text = "${account.unReadMails}+", modifier = Modifier.padding(end = 16.dp),fontFamily = CustomFont)
     }
 }
 

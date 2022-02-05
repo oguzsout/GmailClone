@@ -81,7 +81,7 @@ val mailList = listOf(
         icon = R.drawable.gmail_profile,
         userName = "jackShep",
         email = "jackyshepherd@gmail.com",
-        unReadMails = 99
+        unReadMails = 32
     ),
     Account(userName = "Andy Morty", email = "andy@gmail.com", unReadMails = 80),
     Account(userName = "Philipp Jane", email = "jane@gmail.com", unReadMails = 99)
