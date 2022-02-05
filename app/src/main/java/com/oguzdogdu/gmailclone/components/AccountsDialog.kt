@@ -1,5 +1,6 @@
 package com.oguzdogdu.gmailclone.components
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -9,18 +10,23 @@ import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
+import androidx.compose.material.icons.filled.PersonAddAlt
+import androidx.compose.material.icons.outlined.ManageAccounts
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.MutableState
+import androidx.compose.runtime.mutableStateOf
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
+import androidx.compose.ui.window.DialogProperties
 import com.oguzdogdu.gmailclone.R
 import com.oguzdogdu.gmailclone.accountList
 import com.oguzdogdu.gmailclone.model.Account
@@ -28,13 +34,16 @@ import com.oguzdogdu.gmailclone.ui.theme.CustomFont
 
 @Composable
 fun AccountsDialog(openDialog: MutableState<Boolean>) {
-    Dialog(onDismissRequest = { openDialog.value = false }) {
-        AccountsDialogUI()
+    Dialog(
+        onDismissRequest = { openDialog.value = false },
+        properties = DialogProperties(dismissOnClickOutside = false)
+    ) {
+        AccountsDialogUI(openDialog = openDialog)
     }
 }
 
 @Composable
-fun AccountsDialogUI(modifier: Modifier = Modifier) {
+fun AccountsDialogUI(modifier: Modifier = Modifier, openDialog: MutableState<Boolean>) {
     Card {
         Column(
             modifier = Modifier
@@ -44,14 +53,15 @@ fun AccountsDialogUI(modifier: Modifier = Modifier) {
                 modifier = Modifier.fillMaxWidth(),
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { }) {
+                IconButton(onClick = { openDialog.value = false }) {
                     Icon(
                         imageVector = Icons.Default.Close,
-                        contentDescription = ""
+                        contentDescription = "Close"
                     )
                 }
                 Image(
-                    painter = painterResource(id = R.drawable.google), contentDescription = "",
+                    painter = painterResource(id = R.drawable.google),
+                    contentDescription = "Google",
                     modifier = Modifier
                         .size(30.dp)
                         .weight(2.0f)
@@ -74,9 +84,34 @@ fun AccountsDialogUI(modifier: Modifier = Modifier) {
                         textAlign = TextAlign.Center
                     )
                 }
-                Spacer(modifier.width(10.dp))
             }
             Divider(modifier.padding(top = 16.dp))
+            Column {
+                AccountItem(accountList[1])
+                AccountItem(accountList[2])
+            }
+            AddAccount(icon = Icons.Default.PersonAddAlt, title = "Add Another Account")
+            AddAccount(
+                icon = Icons.Outlined.ManageAccounts,
+                title = "Manage Accounts On This Device"
+            )
+            Divider(modifier = Modifier.padding(top = 16.dp, bottom = 16.dp))
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceEvenly
+            ) {
+                Text(text = "Privacy Policy")
+                Card(
+                    modifier = Modifier
+                        .padding(top = 10.dp)
+                        .size(3.dp),
+                    shape = CircleShape,
+                    backgroundColor = Color.Black
+                ) {
+
+                }
+                Text(text = "Terms Of Service")
+            }
         }
     }
 }
@@ -118,16 +153,44 @@ fun AccountItem(account: Account) {
                 .weight(2.0f)
                 .padding(start = 16.dp, bottom = 16.dp)
         ) {
-            Text(text = account.userName, fontWeight = FontWeight.SemiBold,fontFamily = CustomFont)
-            Text(text = account.email,fontFamily = CustomFont)
+            Text(text = account.userName, fontWeight = FontWeight.SemiBold, fontFamily = CustomFont)
+            Text(text = account.email, fontFamily = CustomFont)
         }
 
-        Text(text = "${account.unReadMails}+", modifier = Modifier.padding(end = 16.dp),fontFamily = CustomFont)
+        Text(
+            text = "${account.unReadMails}+",
+            modifier = Modifier.padding(end = 16.dp),
+            fontFamily = CustomFont
+        )
     }
 }
 
+@Composable
+fun AddAccount(icon: ImageVector, title: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .padding(start = 16.dp)
+    ) {
+        IconButton(onClick = { }) {
+            Icon(
+                imageVector = icon,
+                contentDescription = "",
+                modifier = Modifier.padding(bottom = 8.dp)
+            )
+        }
+        Text(
+            text = title,
+            fontWeight = FontWeight.SemiBold,
+            modifier = Modifier.padding(top = 8.dp, start = 8.dp),
+            fontFamily = CustomFont
+        )
+    }
+}
+
+@SuppressLint("UnrememberedMutableState")
 @Preview
 @Composable
 fun AccountsDialogUiPreview() {
-    AccountsDialogUI()
+    AccountsDialogUI(openDialog = mutableStateOf(false))
 }
