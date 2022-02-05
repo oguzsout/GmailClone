@@ -1,5 +1,6 @@
 package com.oguzdogdu.gmailclone
 
+import com.oguzdogdu.gmailclone.model.Account
 import com.oguzdogdu.gmailclone.model.MailData
 
 val mailList = listOf(
@@ -72,5 +73,16 @@ val mailList = listOf(
         subject = "New opportunity that suits you",
         body = "We have an opening that suits your profile kindly check it out and indicate your interest",
         timeStamp = "20:10"
+
     )
 )
+    val accountList = listOf <Account>(
+    Account(
+        icon = R.drawable.gmail_profile,
+        userName = "jackShep",
+        email = "jackyshepherd@gmail.com",
+        unReadMails = 99
+    ),
+    Account(userName = "Andy Morty", email = "andy@gmail.com", unReadMails = 80),
+    Account(userName = "Philipp Jane", email = "jane@gmail.com", unReadMails = 99)
+    )
