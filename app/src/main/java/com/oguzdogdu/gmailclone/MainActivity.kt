@@ -12,6 +12,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.tooling.preview.Preview
 import com.oguzdogdu.gmailclone.components.*
 import com.oguzdogdu.gmailclone.ui.theme.GmailCloneTheme
@@ -21,6 +23,7 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         setContent {
             GmailCloneTheme {
+                window?.statusBarColor = Color.White.toArgb()
                 Surface(color = MaterialTheme.colors.background) {
                     GmailApp()
                 }

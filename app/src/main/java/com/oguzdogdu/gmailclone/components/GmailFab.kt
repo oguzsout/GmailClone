@@ -15,7 +15,7 @@ fun GmailFab(scrollState: ScrollState) {
             text = {
                 Text(
                     text = "Compose",
-                    fontFamily= CustomFont,
+                    fontFamily = CustomFont,
                     fontSize = 16.sp
                 )
             },
@@ -27,7 +27,6 @@ fun GmailFab(scrollState: ScrollState) {
         )
 
     } else {
-        //Todo 2: add a floating action button
         FloatingActionButton(
             onClick = {},
             backgroundColor = MaterialTheme.colors.surface,

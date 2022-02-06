@@ -29,6 +29,7 @@ private val LightColorPalette = lightColors(
 
 @Composable
 fun GmailCloneTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable() () -> Unit) {
+
     val colors = if (darkTheme) {
         DarkColorPalette
     } else {
